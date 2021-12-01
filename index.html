@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Reconocimiento de voz</title>
+	<style> 
+      * {
+    padding: 0px;
+    margin: 0px;
+    font-family: Century Gothic;
+}
+body {
+    background-color: #ededed;
+}
+div {
+    padding: 50px;
+    margin: 40px;
+    box-shadow: 0px 0px 12px #ccc;
+    background-color: #fff;
+    font-size: 30px
+}
+© 2021 GitHub, Inc
+      </style>
+  
+</head>
+<body>
+<div id="texto"></div>
+<script >
+    let rec;
+    if (!("webkitSpeechRecognition" in window)) {
+    	alert("disculpas, no puedes usar la API");
+    } else {
+    	rec = new webkitSpeechRecognition();
+    	rec.lang = "es-AR";
+    	rec.continuous = true;
+    	rec.interim = true;
+    	rec.addEventListener("result",iniciar);
+    }
+function iniciar(event){
+	for (let i = event.resultIndex; i < event.results.length; i++){
+         document.getElementById('texto').innerHTML = event.results[i][0].transcript;
+	}
+}
+
+
+rec.start();
+  
+  
+  </script>
+</body>
+</html>
